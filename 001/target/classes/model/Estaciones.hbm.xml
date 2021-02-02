@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 24 ene. 2021 16:24:16 by Hibernate Tools 5.2.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="trenes" dynamic-insert="true" dynamic-update="true" mutable="true" name="model.Estaciones" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="estaciones">
+        <id name="codEstacion" type="int">
+            <column name="cod_estacion"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="nombre" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="direccion" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="direccion" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="numaccesos" optimistic-lock="true" type="int" unique="false">
+            <column name="numaccesos" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="numlineas" optimistic-lock="true" type="int" unique="false">
+            <column name="numlineas" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="numviajesdest" optimistic-lock="true" type="int" unique="false">
+            <column name="numviajesdest" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="numviajesproc" optimistic-lock="true" type="int" unique="false">
+            <column name="numviajesproc" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="viajesesForEstacionDst" optimistic-lock="true" sort="unsorted" table="viajes">
+            <key on-delete="noaction">
+                <column name="estacion_dst"/>
+            </key>
+            <one-to-many class="model.Viajes" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="lineaEstacions" optimistic-lock="true" sort="unsorted" table="linea_estacion">
+            <key on-delete="noaction">
+                <column name="cod_estacion" not-null="true"/>
+            </key>
+            <one-to-many class="model.LineaEstacion" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="viajesesForEstacionOg" optimistic-lock="true" sort="unsorted" table="viajes">
+            <key on-delete="noaction">
+                <column name="estacion_og"/>
+            </key>
+            <one-to-many class="model.Viajes" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="accesoses" optimistic-lock="true" sort="unsorted" table="accesos">
+            <key on-delete="noaction">
+                <column name="cod_estacion" not-null="true"/>
+            </key>
+            <one-to-many class="model.Accesos" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>
